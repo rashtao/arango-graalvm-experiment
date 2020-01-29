@@ -4,7 +4,7 @@
 
 ```shell script
 docker run -e ARANGO_ROOT_PASSWORD=test -p 8529:8529 --rm arangodb:3.5
-mvn clean package && ./target/graaldemo 
+mvn clean package && ./target/graalvm-experiment 
 ```
 
 ## results

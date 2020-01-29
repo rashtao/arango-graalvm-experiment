@@ -10,20 +10,20 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <graal.version>19.2.0.1</graal.version>
+        <graal.version>19.3.1</graal.version>
     </properties>
     <dependencies>
         <dependency>
             <groupId>com.arangodb</groupId>
             <artifactId>arangodb-java-driver</artifactId>
-            <version>6.3.0</version>
+            <version>6.5.0</version>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
-                <groupId>com.oracle.substratevm</groupId>
+                <groupId>org.graalvm.nativeimage</groupId>
                 <artifactId>native-image-maven-plugin</artifactId>
                 <version>${graal.version}</version>
                 <executions>
@@ -37,7 +37,21 @@
                 <configuration>
                     <imageName>${project.name}</imageName>
                     <mainClass>Application</mainClass>
-                    <buildArgs>-H:+ReportUnsupportedElementsAtRuntime --allow-incomplete-classpath -H:+ReportExceptionStackTraces</buildArgs>
+                    <buildArgs>
+                        -H:+TraceClassInitialization
+                        -H:+ReportUnsupportedElementsAtRuntime
+                        -H:+ReportExceptionStackTraces
+                        --allow-incomplete-classpath
+                        --report-unsupported-elements-at-runtime
+                    </buildArgs>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
                 </configuration>
             </plugin>
         </plugins>
