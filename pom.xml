@@ -51,7 +51,6 @@
                     <buildArgs>
                         --verbose
                         --no-fallback
-                        --allow-incomplete-classpath
                         --report-unsupported-elements-at-runtime
                         -H:+TraceClassInitialization
                         -H:+ReportExceptionStackTraces
