@@ -18,13 +18,13 @@ public class Application {
         ArangoDB arango = new ArangoDB.Builder().password("test").build();
         Response res = arango.execute(versionRequest);
         System.out.println(res.getBody());
-        arango.shutdown();
 
-        // FIXME: deserialization of ArangoDBVersion fails
-//        String version = arango.getVersion().getVersion();
-//        System.out.println(version);
+        String version = arango.getVersion().getVersion();
+        System.out.println(version);
 
         long end = new Date().getTime();
         System.out.println("elapsed time [ms]: " + (end - start));
+
+        arango.shutdown();
     }
 }
